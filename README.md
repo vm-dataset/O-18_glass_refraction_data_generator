@@ -1,6 +1,6 @@
-# Optics Refraction Data Generator 🎯
+# Glass Refraction Data Generator 🔬
 
-A data generator for creating synthetic "Light Refraction" reasoning tasks. This generator creates datasets where light refraction through glass needs to be predicted, given the glass refractive index and incident angle. The refracted ray must extend to the edge of the image following Snell's law.
+A physics simulation data generator for **light refraction tasks**. This generator creates optics problems where models must predict how light bends when entering glass, using Snell's law with provided refractive indices and incident angles.
 
 ---
 
@@ -27,9 +27,8 @@ A data generator for creating synthetic "Light Refraction" reasoning tasks. This
 ### 1. Clone and Setup Environment
 
 ```bash
-# Clone the repository
-git clone <your-repo-url>
-cd template-data-generator-3
+# Navigate to the generator directory
+cd O-18_glass_refraction_data_generator
 
 # Create virtual environment
 python3 -m venv venv
@@ -63,8 +62,8 @@ Generated data will be saved in `data/questions/{domain}_task/` directory, with 
 ## 📁 Project Structure
 
 ```
-template-data-generator-3/
-├── core/                          # ✅ Core framework code (DO NOT MODIFY)
+O-18_glass_refraction_data_generator/
+├── core/                    # 🔧 Framework utilities
 │   ├── __init__.py               # Export core classes and functions
 │   ├── base_generator.py         # Abstract base generator class
 │   ├── schemas.py                # Data models (TaskPair)
@@ -72,24 +71,22 @@ template-data-generator-3/
 │   ├── video_utils.py            # Video generation utilities
 │   └── output_writer.py          # File output utilities
 │
-├── src/                           # ⚠️ Your task code (NEEDS CUSTOMIZATION)
-│   ├── __init__.py               # Export task-related classes
-│   ├── config.py                 # Task configuration (TaskConfig)
-│   ├── generator.py             # Task generator (TaskGenerator)
-│   └── prompts.py               # Prompt and rubric templates
+├── src/                     # 🔬 Glass refraction implementation
+│   ├── generator.py        # Snell's law physics & ray tracing
+│   ├── prompts.py          # Refraction-specific prompt templates
+│   └── config.py           # Optics parameters & refractive indices
 │
 ├── examples/
 │   └── generate.py               # Data generation entry script
 │
 ├── data/
 │   └── questions/                # Generated data output directory
-│       └── {domain}_task/
-│           └── {task_id}/
-│               ├── first_frame.png
-│               ├── final_frame.png
-│               ├── prompt.txt
-│               ├── rubric.txt
-│               └── ground_truth.mp4 (optional)
+    └── glass_refraction_task/
+        └── glass_refraction_XXXX/
+            ├── first_frame.png     # Incident ray with angle annotation
+            ├── final_frame.png     # Both incident & refracted rays
+            ├── prompt.txt          # Physics problem with refractive index
+            └── ground_truth.mp4    # Ray refraction animation
 │
 ├── requirements.txt               # Python dependencies
 ├── setup.py                       # Package installation configuration

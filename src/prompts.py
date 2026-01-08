@@ -51,49 +51,13 @@ def get_all_prompts(task_type: str = "default") -> list[str]:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  DEFINE YOUR RUBRICS
+#  NOTE: This generator does not use rubrics
 # ══════════════════════════════════════════════════════════════════════════════
 #
-# Rubrics are used to evaluate the quality of model outputs.
-# 
-# Important format requirements:
-#   - Use natural language descriptions that align with human intuition
-#   - Do NOT use numbered lists (e.g., "1. 2. 3.")
-#   - Do NOT include points or percentages (e.g., "1 point", "40%")
-#   - Should describe checkpoints like a human evaluator would
+# The TaskPair schema only includes:
+#   - task_id, domain, prompt
+#   - first_image, final_image  
+#   - ground_truth_video (optional)
 #
-# Example style:
-#   ✓ "Check if the final rotation angle and position match the expected result."
-#   ✓ "Verify that the solution correctly identifies the checkmating move."
-#   ✓ "Ensure the animation smoothly transitions from initial to final state."
-#
-#   ✗ "1. Correctness (4 points): ..."
-#   ✗ "Award 1 point if counts match, 0 otherwise."
-#   ✗ "Move Accuracy (40%): ..."
-#
-# You can define different rubrics for different task types.
+# No rubric field exists in the schema, so only prompts are generated.
 # ══════════════════════════════════════════════════════════════════════════════
-
-RUBRICS = {
-    "default": [
-        """Check if the solution correctly predicts the light refraction angle based on Snell's law. Verify that the refracted ray angle matches the calculated value using the given glass refractive index. Ensure the animation shows smooth light propagation from air into glass, with the ray bending at the glass surface according to physical laws. The final visualization should clearly show both the incident and refracted rays with correct angles.""",
-        
-        """Verify that the solution accurately calculates and visualizes the refraction angle using the provided glass refractive index. Check that the light ray bends correctly at the glass-air interface, with the bending direction and magnitude consistent with Snell's law. The animation should smoothly show light entering the glass and refracting, and the final state should clearly demonstrate the refracted ray propagating in the glass at the correct angle.""",
-        
-        """Confirm the solution shows the correct refraction angle calculation and visualization. Check that the refracted ray angle is accurate based on the given glass refractive index and incident angle. The animation should demonstrate smooth light propagation and refraction, and the final visualization should clearly show the light ray following physical laws as it enters and propagates through the glass.""",
-    ],
-}
-
-
-def get_rubric(task_type: str = "default") -> str:
-    """
-    Select a random rubric for the given task type.
-    
-    Args:
-        task_type: Type of task (key in RUBRICS dict)
-        
-    Returns:
-        Random rubric string from the specified type
-    """
-    rubrics = RUBRICS.get(task_type, RUBRICS["default"])
-    return random.choice(rubrics)

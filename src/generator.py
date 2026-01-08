@@ -97,21 +97,6 @@ class TaskGenerator(BaseGenerator):
             "theta_refracted_radians": theta_refracted_radians,
             "type": "default"
         }
-        """Generate mate-in-1 position using chess library."""
-        generators = [
-            self._gen_back_rank_mate,
-            self._gen_queen_mate,
-            self._gen_rook_mate,
-        ]
-        
-        for _ in range(10):  # Try up to 10 times
-            gen_func = random.choice(generators)
-            position = gen_func()
-            if position and self._validate_mate(position):
-                return position
-        
-        # Fallback to template
-        return random.choice(self._get_fallback_templates())
     
     def _render_initial_state(self, task_data: dict) -> Image.Image:
         """Render initial state: glass surface, incident ray, and angle annotation."""
