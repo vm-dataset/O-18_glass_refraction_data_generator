@@ -30,7 +30,7 @@ class TaskConfig(GenerationConfig):
     #  OVERRIDE DEFAULTS
     # ══════════════════════════════════════════════════════════════════════════
     
-    domain: str = Field(default="optics")
+    domain: str = Field(default="glass_refraction")
     image_size: tuple[int, int] = Field(default=(512, 512))
     
     # ══════════════════════════════════════════════════════════════════════════
